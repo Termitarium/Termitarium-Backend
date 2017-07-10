@@ -1,0 +1,6 @@
+[package]
+name = "termitarium"
+version = "0.1.0"
+authors = ["Ferran Pujol Camins <ferranpujolcamins@gmail.com>"]
+
+[dependencies]
