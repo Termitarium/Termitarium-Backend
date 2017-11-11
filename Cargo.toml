@@ -3,5 +3,10 @@ name = "termitarium"
 version = "0.1.0"
 authors = ["Ferran Pujol Camins <ferranpujolcamins@gmail.com>"]
 
-[dependencies]
-iron = "0.5.*"
+[lib]
+name = "termitarium_lib"
+path = "src/lib.rs"
+
+[[bin]]
+name = "termitarium"
+path = "src/main.rs"
