@@ -1,3 +1,8 @@
+extern crate serde_yaml;
+
+extern crate termitarium_lib;
+use termitarium_lib::model::*;
+
 use std::fs::File;
 use std::io::BufReader;
 use std::io::BufWriter;
@@ -5,13 +10,20 @@ use std::io::Read;
 use std::io::Write;
 use std::io::Error;
 
+
 const CONFIG_FILE_NAME: &str = ".termitarium";
 
 fn main() {
     let mut config_file_contents = read_from_config_file().unwrap();
-    config_file_contents.push('a');
     println!("{}", config_file_contents);
-    write_into_config_file_from(config_file_contents.as_str());
+
+
+//    let model: Model = Model {entities: vec![
+//        Entity{id:"1".to_string(), name:"Task".to_string()},
+//        Entity{id:"2".to_string(), name:"User Story".to_string()},
+//    ]};
+    let model: Model = serde_yaml::from_str(&mut config_file_contents).unwrap();;
+    write_into_config_file_from(&model);
 }
 
 fn read_from_config_file() -> Result <String, Error> {
@@ -24,11 +36,13 @@ fn read_from_config_file() -> Result <String, Error> {
     })
 }
 
-fn write_into_config_file_from(string: &str) -> Result <usize, Error> {
+fn write_into_config_file_from(model: &Model) -> Result <usize, Error> {
+    let serialization: String = serde_yaml::to_string(model).unwrap();
+
     let config_file = File::create(CONFIG_FILE_NAME)?;
 
     let mut buf_writer = BufWriter::new(config_file);
-    buf_writer.write(string.as_bytes())
+    buf_writer.write(serialization.as_bytes())
 }
 
 // Write Model to file
