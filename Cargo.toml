@@ -11,8 +11,12 @@ tui = "0.1.3"
 
 [lib]
 name = "termitarium_lib"
-path = "src/lib.rs"
+path = "src/lib/lib.rs"
 
 [[bin]]
-name = "termitarium"
-path = "src/main.rs"
+name = "termitarium_cli-client"
+path = "src/cli-client/main.rs"
+
+[[bin]]
+name = "termitarium_server"
+path = "src/server/main.rs"
