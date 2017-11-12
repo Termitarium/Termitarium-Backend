@@ -11,7 +11,7 @@ use std::io::Write;
 use std::io::Error;
 
 
-const CONFIG_FILE_NAME: &str = ".termitarium";
+const MODEL_FILE_NAME: &str = ".model";
 
 fn main() {
     let mut config_file_contents = read_from_config_file().unwrap();
@@ -27,7 +27,7 @@ fn main() {
 }
 
 fn read_from_config_file() -> Result <String, Error> {
-    let config_file = File::open(CONFIG_FILE_NAME)?;
+    let config_file = File::open(MODEL_FILE_NAME)?;
 
     let mut buf_reader = BufReader::new(config_file);
     let mut config_file_contents = String::new();
@@ -39,7 +39,7 @@ fn read_from_config_file() -> Result <String, Error> {
 fn write_into_config_file_from(model: &Model) -> Result <usize, Error> {
     let serialization: String = serde_yaml::to_string(model).unwrap();
 
-    let config_file = File::create(CONFIG_FILE_NAME)?;
+    let config_file = File::create(MODEL_FILE_NAME)?;
 
     let mut buf_writer = BufWriter::new(config_file);
     buf_writer.write(serialization.as_bytes())
