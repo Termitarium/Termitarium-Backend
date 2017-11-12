@@ -1,3 +1,5 @@
+mod operations;
+
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Model {
     // TODO: make fields private?
