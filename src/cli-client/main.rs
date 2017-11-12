@@ -1,24 +1,15 @@
 extern crate termitarium_lib;
 use termitarium_lib::model::*;
 
-use std::fs::File;
-use std::io::BufReader;
-use std::io::BufWriter;
-use std::io::Read;
-use std::io::Write;
-use std::io::Error;
-
-
-
 extern crate tui;
 use tui::Terminal;
 use tui::backend::TermionBackend;
 use tui::widgets::{Block, border, Widget};
-use tui::layout::{Group, Rect, Direction, Size};
+use tui::layout::{Group, Direction, Size};
 use tui::style::Style;
 use tui::style::Color;
 
-// DElete me
+// Delete me
 use std::{thread, time};
 
 fn main() {
@@ -31,7 +22,7 @@ fn main() {
     Group::default()
         .direction(Direction::Vertical)
         .sizes(&[Size::Fixed(size.height-3), Size::Fixed(1)])
-        .render(&mut terminal, &size, |mut terminal, chunks| {
+        .render(&mut terminal, &size, |terminal, chunks| {
             Block::default()
                 .title("List")
                 .borders(border::ALL)
