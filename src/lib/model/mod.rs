@@ -16,7 +16,7 @@ pub struct Entity {
 }
 
 impl Entity {
-    // TODO: builder pattern here
+    // TODO: builder pattern here...or how does this relates with Operation types?
     fn new(id: EntityId, entity_type: EntityType, name: EntityName) -> Self {
         Entity {id, entity_type, name}
     }
