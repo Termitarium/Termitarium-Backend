@@ -11,52 +11,9 @@ use std::io::Write;
 use std::io::Error;
 
 
-
-extern crate tui;
-use tui::Terminal;
-use tui::backend::TermionBackend;
-use tui::widgets::{Block, border, Widget};
-use tui::layout::{Group, Rect, Direction, Size};
-use tui::style::Style;
-use tui::style::Color;
-
-// DElete me
-use std::{thread, time};
-
 const MODEL_FILE_NAME: &str = ".model";
 
 fn main() {
-    let backend = TermionBackend::new().unwrap();
-    let mut terminal = Terminal::new(backend).unwrap();
-
-
-    let size = terminal.size().unwrap();
-
-    Group::default()
-        .direction(Direction::Vertical)
-        .sizes(&[Size::Fixed(size.height-3), Size::Fixed(1)])
-        .render(&mut terminal, &size, |mut terminal, chunks| {
-            Block::default()
-                .title("List")
-                .borders(border::ALL)
-                .style(Style::default().bg(Color::Black))
-                .render(terminal, &chunks[0]);
-            Block::default()
-                .title("Command")
-                .borders(border::ALL)
-                .style(Style::default().bg(Color::Black))
-                .render(terminal, &chunks[1]);
-        });
-
-
-    terminal.draw().unwrap();
-
-
-
-    thread::sleep(time::Duration::from_secs(20));
-
-
-
     let mut config_file_contents = read_from_config_file().unwrap();
     println!("{}", config_file_contents);
 
